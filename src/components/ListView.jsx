@@ -31,6 +31,11 @@ function PlaceRow({ place, onSelect, isBookmarked, onToggleBookmark, showDistanc
             >
               {cat.label}
             </span>
+            {place.isHome && (
+              <span className="eyebrow rounded px-1.5 py-0.5 bg-[#c9a227]/15 text-[#7a6114]">
+                Staying here
+              </span>
+            )}
             <span className="text-[13px] text-ink-soft">{place.neighborhood}</span>
             {showDistance && place.distanceKm != null && (
               <span className="text-[13px] text-ink-soft tabular-nums">

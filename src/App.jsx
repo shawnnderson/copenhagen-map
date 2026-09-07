@@ -6,7 +6,6 @@ import PlaceSheet from './components/PlaceSheet.jsx'
 import FilterBar from './components/FilterBar.jsx'
 import Legend from './components/Legend.jsx'
 import TabBar from './components/TabBar.jsx'
-import { CATEGORY_KEYS } from './lib/categories.js'
 import { MAPPABLE, PLACES, PLACES_BY_ID } from './lib/places.js'
 import { distanceKm } from './lib/geo.js'
 import { usePersistentState, useBookmarks } from './lib/storage.js'
@@ -17,7 +16,9 @@ const SHEET_OFFSET = 260 // px of sheet to keep clear when flying to a pin
 
 export default function App() {
   const [view, setView] = useState('map')
-  const [activeCats, setActiveCats] = useState(CATEGORY_KEYS)
+  // Empty means "show everything". Picking categories narrows to just those,
+  // rather than switching them off one at a time.
+  const [selectedCats, setSelectedCats] = useState([])
   const [bookmarkedOnly, setBookmarkedOnly] = useState(false)
   const [selectedId, setSelectedId] = useState(null)
   const [focus, setFocus] = useState(null)
@@ -45,7 +46,7 @@ export default function App() {
 
   const toggleCat = useCallback(
     (key) =>
-      setActiveCats((prev) =>
+      setSelectedCats((prev) =>
         prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key],
       ),
     [],
@@ -60,8 +61,10 @@ export default function App() {
   )
 
   const matches = useCallback(
-    (p) => activeCats.includes(p.category) && (!bookmarkedOnly || isBookmarked(p.id)),
-    [activeCats, bookmarkedOnly, isBookmarked],
+    (p) =>
+      (selectedCats.length === 0 || selectedCats.includes(p.category)) &&
+      (!bookmarkedOnly || isBookmarked(p.id)),
+    [selectedCats, bookmarkedOnly, isBookmarked],
   )
 
   const mapPlaces = useMemo(() => MAPPABLE.filter(matches), [matches])
@@ -153,10 +156,10 @@ export default function App() {
       {view === 'map' && (
         <div className="shrink-0 border-b border-hairline bg-paper">
           <FilterBar
-            activeCats={activeCats}
+            selectedCats={selectedCats}
             onToggleCat={toggleCat}
             onReset={() => {
-              setActiveCats(CATEGORY_KEYS)
+              setSelectedCats([])
               setBookmarkedOnly(false)
             }}
             bookmarkedOnly={bookmarkedOnly}

@@ -92,6 +92,11 @@ export default function PlaceSheet({
             <span className="eyebrow" style={{ color: cat.color }}>
               {cat.label}
             </span>
+            {place.isHome && (
+              <span className="eyebrow rounded-full bg-[#c9a227]/15 px-2 py-1 text-[#7a6114]">
+                Staying here
+              </span>
+            )}
           </div>
 
           <h2 className="display mt-3 text-[34px] leading-[1.05] text-ink">{place.name}</h2>

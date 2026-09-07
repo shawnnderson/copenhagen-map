@@ -8,13 +8,19 @@ const RING_DEFAULT = '#ffffff'
 const RING_SELECTED = '#c9a227'
 const CLUSTER_INK = '#2f3033'
 
-function pinMarkup(categoryKey, selected) {
+function pinMarkup(categoryKey, selected, home = false) {
   const { color } = categoryOf(categoryKey)
-  const ring = selected ? RING_SELECTED : RING_DEFAULT
+  const ring = selected || home ? RING_SELECTED : RING_DEFAULT
+  // Where you're staying gets a second ring, so it's findable at a glance
+  // without hunting through the legend.
+  const halo = home
+    ? `<circle cx="17" cy="17" r="16.2" fill="none" stroke="${RING_SELECTED}" stroke-width="1.6" opacity="0.55"/>`
+    : ''
   return `
-<svg width="34" height="43" viewBox="0 0 34 43" xmlns="http://www.w3.org/2000/svg">
+<svg width="36" height="45" viewBox="-1 -1 36 45" xmlns="http://www.w3.org/2000/svg">
   <path d="M17 42 L10.2 28 h13.6 Z" fill="${color}"/>
-  <circle cx="17" cy="17" r="14.5" fill="${color}" stroke="${ring}" stroke-width="${selected ? 2.8 : 2.2}"/>
+  <circle cx="17" cy="17" r="14.5" fill="${color}" stroke="${ring}" stroke-width="${selected || home ? 2.8 : 2.2}"/>
+  ${halo}
   <g transform="translate(9.5,9.5) scale(0.625)">
     ${iconSvgMarkup(categoryKey, { size: 24, color: '#ffffff', width: 2.2 })}
   </g>
@@ -41,16 +47,16 @@ function clusterMarkup(count, color) {
 
 const iconCache = new Map()
 
-function pinIcon(categoryKey, selected) {
-  const key = `${categoryKey}:${selected}`
+function pinIcon(categoryKey, selected, home = false) {
+  const key = `${categoryKey}:${selected}:${home}`
   if (!iconCache.has(key)) {
     iconCache.set(
       key,
       L.divIcon({
-        html: pinMarkup(categoryKey, selected),
+        html: pinMarkup(categoryKey, selected, home),
         className: `pin${selected ? ' pin-selected' : ''}`,
-        iconSize: [34, 43],
-        iconAnchor: [17, 42],
+        iconSize: [36, 45],
+        iconAnchor: [18, 43],
       }),
     )
   }
@@ -116,18 +122,44 @@ export default function ClusterLayer({ places, selectedId, onSelect }) {
     }
   }, [group, map])
 
+  // Home sits outside the cluster group — being swallowed into a "6" would
+  // defeat the point of marking it.
+  const homeMarkerRef = useRef(null)
+
   useEffect(() => {
     group.clearLayers()
-    const markers = places.map((place) =>
-      L.marker([place.lat, place.lng], {
-        icon: pinIcon(place.category, place.id === selectedId),
-        placeCategory: place.category,
-        zIndexOffset: place.id === selectedId ? 1000 : 0,
-        alt: place.name,
-      }).on('click', () => onSelectRef.current(place.id)),
-    )
+    const markers = places
+      .filter((place) => !place.isHome)
+      .map((place) =>
+        L.marker([place.lat, place.lng], {
+          icon: pinIcon(place.category, place.id === selectedId),
+          placeCategory: place.category,
+          zIndexOffset: place.id === selectedId ? 1000 : 0,
+          alt: place.name,
+        }).on('click', () => onSelectRef.current(place.id)),
+      )
     group.addLayers(markers)
   }, [group, places, selectedId])
+
+  useEffect(() => {
+    if (homeMarkerRef.current) {
+      map.removeLayer(homeMarkerRef.current)
+      homeMarkerRef.current = null
+    }
+    const home = places.find((p) => p.isHome)
+    if (!home) return
+    const marker = L.marker([home.lat, home.lng], {
+      icon: pinIcon(home.category, home.id === selectedId, true),
+      zIndexOffset: 1500,
+      alt: `${home.name} — where you're staying`,
+    }).on('click', () => onSelectRef.current(home.id))
+    marker.addTo(map)
+    homeMarkerRef.current = marker
+    return () => {
+      if (homeMarkerRef.current) map.removeLayer(homeMarkerRef.current)
+      homeMarkerRef.current = null
+    }
+  }, [map, places, selectedId])
 
   return null
 }

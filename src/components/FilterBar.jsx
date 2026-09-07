@@ -37,7 +37,7 @@ function Chip({ active, color, onClick, label, count, children, ariaLabel }) {
 }
 
 export default function FilterBar({
-  activeCats,
+  selectedCats,
   onToggleCat,
   onReset,
   bookmarkedOnly,
@@ -46,9 +46,9 @@ export default function FilterBar({
   counts,
   total,
 }) {
-  // With nothing narrowed, "All" is the filled chip and the rest are outlines —
-  // filling every chip by default would read as seven active filters.
-  const filtering = activeCats.length !== CATEGORY_KEYS.length || bookmarkedOnly
+  // No selection means everything shows, so "All" is the filled chip and the
+  // rest are outlines. Picking one narrows to it; picking more adds them.
+  const filtering = selectedCats.length > 0 || bookmarkedOnly
   const allActive = !filtering
 
   return (
@@ -61,7 +61,7 @@ export default function FilterBar({
 
       {CATEGORY_KEYS.map((key) => {
         const cat = CATEGORIES[key]
-        const active = filtering && activeCats.includes(key)
+        const active = selectedCats.includes(key)
         return (
           <Chip
             key={key}

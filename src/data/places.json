@@ -153,10 +153,11 @@
     "name": "Villa Copenhagen",
     "category": "stay",
     "neighborhood": "Postbyen",
-    "note": "Hotel.",
+    "note": "Where you're staying.",
     "recommendedBy": "",
     "lat": 55.671403,
-    "lng": 12.567736
+    "lng": 12.567736,
+    "home": true
   },
   {
     "name": "Louisiana Museum of Modern Art",
@@ -212,15 +213,6 @@
     "recommendedBy": "",
     "lat": 55.682002,
     "lng": 12.58246
-  },
-  {
-    "name": "Hotel Sanders",
-    "category": "stay",
-    "neighborhood": "Christianshavn",
-    "note": "TATA Cocktail Bar is out front and on the roof.",
-    "recommendedBy": "",
-    "lat": 55.67843,
-    "lng": 12.587561
   },
   {
     "name": "Les Trois Cochons",

@@ -28,10 +28,12 @@ export const PLACES = raw.map((p) => {
   const base = slug(p.name)
   const n = (seen.get(base) ?? 0) + 1
   seen.set(base, n)
-  return { ...p, id: n === 1 ? base : `${base}-${n}`, hasCoords: hasCoords(p) }
+  return { ...p, id: n === 1 ? base : `${base}-${n}`, hasCoords: hasCoords(p), isHome: p.home === true }
 })
 
 export const MAPPABLE = PLACES.filter((p) => p.hasCoords)
+
+export const HOME = PLACES.find((p) => p.isHome && p.hasCoords) ?? null
 
 export const PLACES_BY_ID = new Map(PLACES.map((p) => [p.id, p]))
 
