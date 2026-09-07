@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Kødbyens Fiskebar",
+    "category": "restaurant",
+    "neighborhood": "Vesterbro",
+    "note": "Old meatpacking district. Oysters and natural wine at the bar, no reservation needed if you go early.",
+    "recommendedBy": "Maya",
+    "lat": 55.6684,
+    "lng": 12.5614
+  },
+  {
+    "name": "Hart Bageri",
+    "category": "coffee",
+    "neighborhood": "Frederiksberg",
+    "note": "Best cardamom bun in the city. Sells out by noon on weekends.",
+    "recommendedBy": "Jonas",
+    "lat": 55.6786,
+    "lng": 12.529
+  },
+  {
+    "name": "Havnebadet Islands Brygge",
+    "category": "activity",
+    "neighborhood": "Islands Brygge",
+    "note": "Harbour bath, free, clean water. Bring a towel and go before 11am to beat the crowd.",
+    "recommendedBy": "Sofie",
+    "lat": 55.669,
+    "lng": 12.579
+  }
+]
