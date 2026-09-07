@@ -2,15 +2,29 @@ import { useEffect, useRef, useState } from 'react'
 import { categoryOf } from '../lib/categories.js'
 import { googleMapsUrl } from '../lib/places.js'
 import { formatDistance } from '../lib/geo.js'
+import CategoryIcon from './CategoryIcon.jsx'
 
-/**
- * Bottom sheet for a tapped pin. Swipe down on the handle (or tap the backdrop)
- * to dismiss — everything actionable sits within thumb reach at the bottom.
- */
-export default function PlaceSheet({ place, onClose, isBookmarked, onToggleBookmark, days, dayOf, onAssignDay, distanceKm }) {
+function Row({ label, children }) {
+  return (
+    <div className="flex gap-4 border-t border-hairline py-3">
+      <span className="w-20 shrink-0 pt-px text-[13px] text-ink-soft">{label}</span>
+      <span className="flex-1 text-[14px] text-ink">{children}</span>
+    </div>
+  )
+}
+
+export default function PlaceSheet({
+  place,
+  onClose,
+  isBookmarked,
+  onToggleBookmark,
+  days,
+  dayOf,
+  onAssignDay,
+  distanceKm,
+}) {
   const [dragY, setDragY] = useState(0)
   const startY = useRef(null)
-  const sheetRef = useRef(null)
 
   useEffect(() => {
     setDragY(0)
@@ -44,105 +58,139 @@ export default function PlaceSheet({ place, onClose, isBookmarked, onToggleBookm
         type="button"
         aria-label="Close"
         onClick={onClose}
-        className="fixed inset-0 z-[900] bg-ink/20 backdrop-blur-[1px]"
+        className="fixed inset-0 z-[900] bg-ink/25"
       />
 
       <section
-        ref={sheetRef}
         role="dialog"
         aria-label={place.name}
-        className="sheet-enter fixed inset-x-0 bottom-0 z-[901] max-h-[80vh] overflow-y-auto rounded-t-3xl bg-white shadow-2xl"
+        className="sheet-enter fixed inset-x-0 bottom-0 z-[901] flex max-h-[86vh] flex-col rounded-t-[28px] bg-surface shadow-[0_-8px_40px_rgba(22,23,26,0.22)]"
         style={{
           transform: `translateY(${dragY}px)`,
           transition: startY.current == null ? 'transform 200ms ease' : 'none',
-          paddingBottom: 'calc(var(--sab) + 1rem)',
         }}
       >
         <div
-          className="drag-handle sticky top-0 flex justify-center rounded-t-3xl bg-white pb-1 pt-3"
+          className="drag-handle flex shrink-0 justify-center rounded-t-[28px] pt-3 pb-1"
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
         >
-          <span className="h-1.5 w-10 rounded-full bg-slate-300" />
+          <span className="h-1 w-9 rounded-full bg-hairline" />
         </div>
 
-        <div className="px-5 pt-2">
-          <div className="flex items-start gap-3">
+        <div className="min-h-0 flex-1 overflow-y-auto px-6 pt-3">
+          {/* Eyebrow: category badge + name, in the category's own colour. */}
+          <div className="flex items-center gap-2.5">
             <span
-              className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-lg"
-              style={{ background: `${cat.color}1f` }}
-              aria-hidden
+              className="grid h-8 w-8 place-items-center rounded-full text-white"
+              style={{ background: cat.color }}
             >
-              {cat.emoji}
+              <CategoryIcon category={place.category} size={16} strokeWidth={2.1} />
             </span>
-            <div className="min-w-0 flex-1">
-              <h2 className="text-xl leading-tight font-bold text-ink">{place.name}</h2>
-              <p className="mt-0.5 text-sm text-ink-soft">
-                <span style={{ color: cat.color }} className="font-semibold">
-                  {cat.plural}
-                </span>
-                {place.neighborhood && <> · {place.neighborhood}</>}
-                {distanceKm != null && <> · {formatDistance(distanceKm)} away</>}
-              </p>
-            </div>
+            <span className="eyebrow" style={{ color: cat.color }}>
+              {cat.label}
+            </span>
           </div>
 
-          {place.note && <p className="mt-4 text-[15px] leading-relaxed text-ink">{place.note}</p>}
+          <h2 className="display mt-3 text-[34px] leading-[1.05] text-ink">{place.name}</h2>
+
+          <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] text-ink-soft">
+            <span className="font-medium text-ink">{place.neighborhood}</span>
+            {distanceKm != null && (
+              <>
+                <span aria-hidden className="text-ink-faint">
+                  ·
+                </span>
+                <span className="tabular-nums">{formatDistance(distanceKm)} away</span>
+              </>
+            )}
+          </p>
 
           {place.recommendedBy && (
-            <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-ink-soft">
-              <span aria-hidden>💬</span> Recommended by {place.recommendedBy}
-            </p>
+            <div className="mt-6">
+              <p className="eyebrow text-ink-faint">Recommended by</p>
+              <p className="mt-2 text-[15px] font-semibold text-ink">{place.recommendedBy}</p>
+              {place.note && (
+                <p className="mt-1.5 text-[15px] leading-relaxed text-ink-soft">{place.note}</p>
+              )}
+            </div>
           )}
 
-          {/* Day assignment feeds straight into the itinerary tab. */}
-          <div className="mt-5">
-            <p className="mb-2 text-xs font-semibold tracking-wide text-ink-soft uppercase">
-              Add to day
-            </p>
-            <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1">
-              {days.map((day, i) => {
-                const active = assignedDay === day.id
-                return (
-                  <button
-                    key={day.id}
-                    type="button"
-                    onClick={() => onAssignDay(place.id, active ? null : day.id)}
-                    aria-pressed={active}
-                    className={`shrink-0 rounded-full px-4 py-2.5 text-sm font-semibold transition ${
-                      active ? 'bg-ink text-white' : 'bg-slate-100 text-ink-soft'
-                    }`}
-                  >
-                    Day {i + 1}
-                  </button>
-                )
-              })}
-            </div>
-          </div>
+          {!place.recommendedBy && place.note && (
+            <p className="mt-6 text-[15px] leading-relaxed text-ink-soft">{place.note}</p>
+          )}
 
-          <div className="mt-5 flex gap-3">
-            <a
-              href={googleMapsUrl(place)}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-brand px-4 py-4 text-[15px] font-semibold text-white shadow-lg active:scale-[0.98]"
-            >
-              <span aria-hidden>🧭</span> Open in Google Maps
-            </a>
+          <div className="mt-6">
+            <Row label="Category">{cat.label}</Row>
+            <Row label="Area">{place.neighborhood}</Row>
+            <Row label="Day">
+              <span className="flex flex-wrap gap-1.5">
+                {days.map((day, i) => {
+                  const active = assignedDay === day.id
+                  return (
+                    <button
+                      key={day.id}
+                      type="button"
+                      onClick={() => onAssignDay(place.id, active ? null : day.id)}
+                      aria-pressed={active}
+                      className={`rounded-full border px-3 py-1.5 text-[13px] font-semibold transition ${
+                        active
+                          ? 'border-ink bg-ink text-white'
+                          : 'border-hairline bg-white text-ink-soft'
+                      }`}
+                    >
+                      Day {i + 1}
+                    </button>
+                  )
+                })}
+              </span>
+            </Row>
+          </div>
+        </div>
+
+        {/* Actions pinned below the scroll area so they're always in thumb reach. */}
+        <div
+          className="shrink-0 border-t border-hairline px-6 pt-3"
+          style={{ paddingBottom: 'calc(var(--sab) + 0.85rem)' }}
+        >
+          <div className="flex gap-2.5">
             <button
               type="button"
               onClick={() => onToggleBookmark(place.id)}
               aria-pressed={isBookmarked}
-              className={`flex items-center justify-center gap-2 rounded-2xl px-5 py-4 text-[15px] font-semibold shadow-lg transition active:scale-[0.98] ${
-                isBookmarked ? 'bg-amber-400 text-ink' : 'bg-slate-100 text-ink'
+              className={`flex flex-1 items-center justify-center gap-2 rounded-full border py-3.5 text-[14px] font-semibold transition active:scale-[0.99] ${
+                isBookmarked ? 'border-ink bg-ink text-white' : 'border-hairline bg-white text-ink'
               }`}
             >
-              <span aria-hidden>{isBookmarked ? '★' : '☆'}</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill={isBookmarked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinejoin="round">
+                <path d="M6 3.5h12v17l-6-4.5-6 4.5v-17Z" />
+              </svg>
               {isBookmarked ? 'Saved' : 'Save'}
             </button>
+            <a
+              href={googleMapsUrl(place)}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label={`Open ${place.name} in Google Maps`}
+              className="grid h-[50px] w-[50px] shrink-0 place-items-center rounded-full border border-hairline bg-white text-ink active:scale-[0.97]"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round">
+                <path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11Z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+            </a>
           </div>
+
+          <a
+            href={googleMapsUrl(place)}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-2.5 flex items-center justify-center rounded-full bg-ink py-4 text-[15px] font-semibold text-white active:scale-[0.99]"
+          >
+            Google Maps
+          </a>
         </div>
       </section>
     </>

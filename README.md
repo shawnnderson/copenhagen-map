@@ -72,6 +72,13 @@ only runs on a built/previewed site, not in `npm run dev`.
   reconciled on load, and new places land in "Unscheduled".
 - Icons are generated, not checked in by hand: `npm run icons` regenerates them
   from `scripts/make-icons.mjs` (change `BRAND` there to recolor).
+- The basemap is standard OpenStreetMap raster, desaturated to a Positron-like
+  grey by a CSS filter on `.leaflet-tile-pane` (see `src/index.css`). That keeps
+  the look without an API key — CARTO's hosted Positron now requires one. Tune
+  the `grayscale/brightness/contrast` values there to taste.
+- Category colours, labels and icon geometry all live in `src/lib/categories.js`.
+  Adding a category means adding one entry there; pins, chips, legend, list tags
+  and the sheet all pick it up.
 - Tiles come from OpenStreetMap. Fine for personal use; if this ever grows
   beyond that, switch `TileLayer` in `src/components/MapView.jsx` to a
   provider with a suitable plan.

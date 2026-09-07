@@ -80,6 +80,8 @@ export default function App() {
     return acc
   }, [])
 
+  const [legendOpen, setLegendOpen] = useState(false)
+
   const selected = selectedId ? PLACES_BY_ID.get(selectedId) : null
 
   const openPlace = useCallback((id) => {
@@ -136,30 +138,58 @@ export default function App() {
   )
 
   return (
-    <div className="flex h-full flex-col overflow-hidden">
+    <div className="flex h-full flex-col overflow-hidden bg-paper">
+      {/* Persistent masthead — wordmark left, city right, as a fixed anchor. */}
+      <header
+        className="flex shrink-0 items-center justify-between border-b border-hairline bg-paper px-4 pb-2.5"
+        style={{ paddingTop: 'calc(var(--sat) + 0.65rem)' }}
+      >
+        <span className="wordmark text-[17px] text-ink">Trip</span>
+        <span className="wordmark rounded-full bg-ink px-3 py-1.5 text-[11px] text-white">
+          København
+        </span>
+      </header>
+
+      {view === 'map' && (
+        <div className="shrink-0 border-b border-hairline bg-paper">
+          <FilterBar
+            activeCats={activeCats}
+            onToggleCat={toggleCat}
+            onReset={() => {
+              setActiveCats(CATEGORY_KEYS)
+              setBookmarkedOnly(false)
+            }}
+            bookmarkedOnly={bookmarkedOnly}
+            onToggleBookmarked={() => setBookmarkedOnly((v) => !v)}
+            bookmarkCount={bookmarks.length}
+            counts={counts}
+            total={PLACES.length}
+          />
+        </div>
+      )}
+
       <main className="relative min-h-0 flex-1">
         {/* The map stays mounted so pan/zoom survive tab switches. */}
-        <div className={`absolute inset-0 ${view === 'map' ? '' : 'invisible'}`} aria-hidden={view !== 'map'}>
+        <div
+          className={`absolute inset-0 ${view === 'map' ? '' : 'invisible'}`}
+          aria-hidden={view !== 'map'}
+        >
           <MapView
             active={view === 'map'}
             places={mapPlaces}
+            totalCount={MAPPABLE.length}
             selectedId={selectedId}
             onSelect={selectOnMap}
             position={position}
             focus={focus}
             nudge={nudge}
             sheetOffset={SHEET_OFFSET}
+            onLocate={nearMeFromMap}
+            locating={geoStatus === 'locating'}
+            legendOpen={legendOpen}
+            onToggleLegend={() => setLegendOpen((v) => !v)}
+            legend={<Legend counts={counts} />}
           />
-          <Legend counts={counts} />
-
-          <button
-            type="button"
-            onClick={nearMeFromMap}
-            aria-label="Find places near me"
-            className="absolute right-3 bottom-3 z-[500] grid h-14 w-14 place-items-center rounded-full bg-white text-2xl shadow-xl ring-1 ring-black/5 active:scale-95"
-          >
-            {geoStatus === 'locating' ? '⏳' : '📍'}
-          </button>
         </div>
 
         {view === 'list' && (
@@ -169,7 +199,6 @@ export default function App() {
               onSelect={openPlace}
               isBookmarked={isBookmarked}
               onToggleBookmark={toggleBookmark}
-              position={position}
               geoStatus={geoStatus}
               onLocate={locate}
               sortedByDistance={sortByDistance && !!position}
@@ -183,19 +212,6 @@ export default function App() {
           </div>
         )}
       </main>
-
-      {view === 'map' && (
-        <div className="bg-white/95 backdrop-blur">
-          <FilterBar
-            activeCats={activeCats}
-            onToggleCat={toggleCat}
-            onReset={() => setActiveCats(CATEGORY_KEYS)}
-            bookmarkedOnly={bookmarkedOnly}
-            onToggleBookmarked={() => setBookmarkedOnly((v) => !v)}
-            bookmarkCount={bookmarks.length}
-          />
-        </div>
-      )}
 
       <TabBar view={view} onChange={setView} itineraryCount={scheduledCount} />
 

@@ -21,6 +21,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { POOL, addDay, findContainer, removeLastDay } from '../lib/itinerary.js'
 import { categoryOf } from '../lib/categories.js'
+import CategoryIcon from './CategoryIcon.jsx'
 import { PLACES_BY_ID } from '../lib/places.js'
 
 function Row({ place, onOpen, onRemove, inPool }) {
@@ -33,26 +34,38 @@ function Row({ place, onOpen, onRemove, inPool }) {
     <li
       ref={setNodeRef}
       style={{ transform: CSS.Translate.toString(transform), transition }}
-      className={`flex items-center gap-2 rounded-xl bg-white px-2 py-2.5 shadow-sm ring-1 ring-black/5 ${
+      className={`flex items-center gap-1 rounded-2xl border border-hairline bg-surface px-1.5 py-2.5 ${
         isDragging ? 'opacity-40' : ''
       }`}
     >
       {/* Listeners live on the handle only, so the page still scrolls on touch. */}
       <button
         type="button"
-        className="drag-handle px-2 py-2 text-lg leading-none text-slate-400"
+        className="drag-handle px-2 py-2 text-ink-faint"
         aria-label={`Reorder ${place.name}`}
         {...attributes}
         {...listeners}
       >
-        ⠿
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <circle cx="9" cy="6" r="1.6" />
+          <circle cx="15" cy="6" r="1.6" />
+          <circle cx="9" cy="12" r="1.6" />
+          <circle cx="15" cy="12" r="1.6" />
+          <circle cx="9" cy="18" r="1.6" />
+          <circle cx="15" cy="18" r="1.6" />
+        </svg>
       </button>
 
-      <button type="button" onClick={() => onOpen(place.id)} className="flex min-w-0 flex-1 items-center gap-2 text-left">
-        <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: cat.color }} aria-hidden />
+      <button type="button" onClick={() => onOpen(place.id)} className="flex min-w-0 flex-1 items-center gap-2.5 text-left">
+        <span
+          className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-white"
+          style={{ background: cat.color }}
+        >
+          <CategoryIcon category={place.category} size={14} strokeWidth={2.2} />
+        </span>
         <span className="min-w-0">
-          <span className="block truncate text-sm font-semibold text-ink">{place.name}</span>
-          <span className="block truncate text-xs text-ink-soft">{place.neighborhood}</span>
+          <span className="display block truncate text-[15px] text-ink">{place.name}</span>
+          <span className="block truncate text-[12px] text-ink-soft">{place.neighborhood}</span>
         </span>
       </button>
 
@@ -61,9 +74,11 @@ function Row({ place, onOpen, onRemove, inPool }) {
           type="button"
           onClick={() => onRemove(place.id)}
           aria-label={`Remove ${place.name} from this day`}
-          className="px-3 py-2 text-sm text-slate-400"
+          className="px-2.5 py-2 text-ink-faint"
         >
-          ✕
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
         </button>
       )}
     </li>
@@ -76,12 +91,12 @@ function Container({ id, title, subtitle, placeIds, onOpen, onRemove, inPool }) 
 
   return (
     <section className="mb-4">
-      <div className="mb-2 flex items-baseline justify-between px-1">
-        <h2 className="text-sm font-bold tracking-wide text-ink uppercase">{title}</h2>
-        <span className="text-xs text-ink-soft">{subtitle}</span>
+      <div className="mb-2 flex items-baseline justify-between border-b border-hairline px-1 pb-1.5">
+        <h2 className="eyebrow text-ink">{title}</h2>
+        <span className="text-[12px] text-ink-faint tabular-nums">{subtitle}</span>
       </div>
       <SortableContext items={placeIds} strategy={verticalListSortingStrategy}>
-        <ul ref={setNodeRef} className="min-h-[64px] space-y-2 rounded-2xl bg-slate-200/60 p-2">
+        <ul ref={setNodeRef} className="min-h-[60px] space-y-1.5 rounded-2xl p-1">
           {placeIds.map((pid) => {
             const place = PLACES_BY_ID.get(pid)
             return place ? (
@@ -89,7 +104,7 @@ function Container({ id, title, subtitle, placeIds, onOpen, onRemove, inPool }) 
             ) : null
           })}
           {placeIds.length === 0 && (
-            <li className="grid h-14 place-items-center text-xs text-ink-soft">
+            <li className="grid h-14 place-items-center rounded-xl border border-dashed border-hairline text-[12px] text-ink-faint">
               Drag a place here
             </li>
           )}
@@ -157,29 +172,26 @@ export default function ItineraryView({ itinerary, setItinerary, onOpen }) {
   const activePlace = activeId ? PLACES_BY_ID.get(activeId) : null
 
   return (
-    <div className="h-full overflow-y-auto bg-slate-100" style={{ paddingTop: 'calc(var(--sat) + 0.5rem)' }}>
+    <div className="h-full overflow-y-auto bg-paper">
       <header className="flex items-center justify-between px-4 py-3">
-        <div>
-          <h1 className="text-lg font-bold text-ink">Itinerary</h1>
-          <p className="text-xs text-ink-soft">Hold a handle to drag between days</p>
-        </div>
+        <p className="text-[13px] text-ink-soft">Hold a handle to drag between days</p>
         <div className="flex gap-2">
           <button
             type="button"
             onClick={() => setItinerary(removeLastDay)}
             disabled={itinerary.days.length <= 1}
             aria-label="Remove last day"
-            className="h-10 w-10 rounded-full bg-white text-lg font-bold text-ink-soft shadow-sm disabled:opacity-40"
+            className="grid h-9 w-9 place-items-center rounded-full border border-hairline bg-surface text-ink disabled:opacity-40"
           >
-            −
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M5 12h14" /></svg>
           </button>
           <button
             type="button"
             onClick={() => setItinerary(addDay)}
             aria-label="Add a day"
-            className="h-10 w-10 rounded-full bg-ink text-lg font-bold text-white shadow-sm"
+            className="grid h-9 w-9 place-items-center rounded-full bg-ink text-white"
           >
-            +
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
           </button>
         </div>
       </header>
@@ -220,12 +232,14 @@ export default function ItineraryView({ itinerary, setItinerary, onOpen }) {
 
           <DragOverlay>
             {activePlace && (
-              <div className="flex items-center gap-2 rounded-xl bg-white px-4 py-3 shadow-2xl ring-2 ring-ink/10">
+              <div className="flex items-center gap-2.5 rounded-2xl bg-surface px-4 py-3 shadow-[0_10px_30px_rgba(22,23,26,0.25)]">
                 <span
-                  className="h-2.5 w-2.5 rounded-full"
+                  className="grid h-7 w-7 place-items-center rounded-full text-white"
                   style={{ background: categoryOf(activePlace.category).color }}
-                />
-                <span className="text-sm font-semibold text-ink">{activePlace.name}</span>
+                >
+                  <CategoryIcon category={activePlace.category} size={14} strokeWidth={2.2} />
+                </span>
+                <span className="display text-[15px] text-ink">{activePlace.name}</span>
               </div>
             )}
           </DragOverlay>

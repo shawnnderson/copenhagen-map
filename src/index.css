@@ -1,9 +1,15 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-ink: #0f172a;
-  --color-ink-soft: #475569;
-  --color-brand: #c8102e;
+  /* Warm, low-chroma editorial palette — the map is nearly greyscale, so
+     chrome has to stay quiet and let the category colours do the work. */
+  --color-paper: #f4f4f1;
+  --color-surface: #ffffff;
+  --color-ink: #16171a;
+  --color-ink-soft: #74746e;
+  --color-ink-faint: #a3a39c;
+  --color-hairline: #e4e4de;
+  --color-accent: #14544a;
 }
 
 :root {
@@ -23,44 +29,79 @@ body {
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
   color: var(--color-ink);
-  background: #e2e8f0;
-  /* No rubber-band scroll behind the map / sheet. */
+  background: var(--color-paper);
   overscroll-behavior: none;
   -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Leaflet sits below every piece of app chrome. */
+/* Uppercase letterspaced micro-label — the workhorse of the whole layout. */
+.eyebrow {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.wordmark {
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Tight tracking on big text reads as editorial rather than UI-default. */
+.display {
+  letter-spacing: -0.022em;
+  font-weight: 700;
+}
+
+/* Positron-style basemap without a tile provider API key: desaturate the
+   standard OSM raster. Applied to the tile pane only, so pins, the accuracy
+   circle and all overlays keep their colour. */
+.leaflet-tile-pane {
+  filter: grayscale(1) brightness(1.17) contrast(0.76);
+}
+
 .leaflet-container {
   height: 100%;
   width: 100%;
-  background: #dfe4ea;
+  background: #e8e8e4;
   font: inherit;
   z-index: 0;
 }
 
 .leaflet-control-attribution {
-  font-size: 10px;
-  background: rgb(255 255 255 / 0.75);
+  font-size: 9px;
+  background: rgb(255 255 255 / 0.72);
+  color: var(--color-ink-faint);
 }
 
-/* Category pins are div icons so colours come straight from categories.js. */
+.leaflet-control-attribution a {
+  color: var(--color-ink-soft);
+}
+
 .pin {
-  display: grid;
-  place-items: center;
-  transition: transform 140ms ease;
+  background: none;
+  border: none;
 }
 
 .pin svg {
-  filter: drop-shadow(0 2px 3px rgb(15 23 42 / 0.35));
+  display: block;
+  filter: drop-shadow(0 2px 4px rgb(22 23 26 / 0.28));
+  transition: transform 140ms ease;
+  transform-origin: 50% 100%;
 }
 
 .pin-selected {
-  transform: scale(1.25);
   z-index: 1000 !important;
 }
 
+.pin-selected svg {
+  transform: scale(1.16);
+}
+
 .sheet-enter {
-  animation: sheet-up 260ms cubic-bezier(0.32, 0.72, 0, 1);
+  animation: sheet-up 280ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @keyframes sheet-up {
@@ -74,13 +115,12 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .sheet-enter,
-  .pin {
+  .pin svg {
     animation: none;
     transition: none;
   }
 }
 
-/* Horizontal chip rows: scrollable, no visible scrollbar. */
 .no-scrollbar {
   scrollbar-width: none;
 }
@@ -88,7 +128,6 @@ body {
   display: none;
 }
 
-/* Drag handles must not fight the browser's touch scrolling. */
 .drag-handle {
   touch-action: none;
   cursor: grab;

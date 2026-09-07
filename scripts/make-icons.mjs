@@ -11,7 +11,7 @@ import { dirname, resolve } from 'node:path'
 
 const OUT = resolve(dirname(fileURLToPath(import.meta.url)), '../public/icons')
 
-const BRAND = [200, 16, 46] // Dansk flag red
+const BRAND = [22, 23, 26] // editorial ink, matching --color-ink
 const GLYPH = [255, 255, 255]
 
 /* ---------- PNG encoding ---------- */

@@ -23,8 +23,8 @@ export default defineConfig({
         scope: BASE,
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#0f172a',
-        theme_color: '#c8102e',
+        background_color: '#f4f4f1',
+        theme_color: '#16171a',
         categories: ['travel', 'navigation'],
         icons: [
           { src: `${BASE}icons/icon-192.png`, sizes: '192x192', type: 'image/png' },
@@ -44,10 +44,12 @@ export default defineConfig({
           {
             // Map tiles: cache-first and keep them. This is what makes the map
             // usable on spotty data — anything you have already panned over stays.
-            urlPattern: ({ url }) => url.hostname.endsWith('tile.openstreetmap.org'),
+            urlPattern: ({ url }) =>
+              url.hostname.endsWith('basemaps.cartocdn.com') ||
+              url.hostname.endsWith('tile.openstreetmap.org'),
             handler: 'CacheFirst',
             options: {
-              cacheName: 'osm-tiles',
+              cacheName: 'map-tiles',
               expiration: { maxEntries: 3000, maxAgeSeconds: 60 * 60 * 24 * 30 },
               cacheableResponse: { statuses: [0, 200] },
             },
