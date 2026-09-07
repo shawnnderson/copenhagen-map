@@ -45,7 +45,7 @@ export default defineConfig({
             // Map tiles: cache-first and keep them. This is what makes the map
             // usable on spotty data — anything you have already panned over stays.
             urlPattern: ({ url }) =>
-              url.hostname.endsWith('basemaps.cartocdn.com') ||
+              url.hostname.endsWith('arcgisonline.com') ||
               url.hostname.endsWith('tile.openstreetmap.org'),
             handler: 'CacheFirst',
             options: {

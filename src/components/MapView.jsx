@@ -1,50 +1,12 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { MapContainer, TileLayer, Marker, Circle, useMap } from 'react-leaflet'
+import { MapContainer, Marker, Circle, useMap } from 'react-leaflet'
 import L from 'leaflet'
-import { categoryOf, iconSvgMarkup } from '../lib/categories.js'
+import BaseLayer from './BaseLayer.jsx'
+import ClusterLayer from './ClusterLayer.jsx'
 import { CITY_CENTER, MAPPABLE } from '../lib/places.js'
 import { distanceKm } from '../lib/geo.js'
 
-const CORE_RADIUS_KM = 15 // pins beyond this don't drive the opening view
-
-const RING_DEFAULT = '#ffffff'
-const RING_SELECTED = '#c9a227' // warm gold, as on the reference's active pins
-
-/**
- * Circular badge pin with a short tail: the tail is drawn first so the disc
- * overlaps it and the two read as one shape.
- */
-function pinMarkup(categoryKey, selected) {
-  const { color } = categoryOf(categoryKey)
-  const ring = selected ? RING_SELECTED : RING_DEFAULT
-  return `
-<svg width="34" height="43" viewBox="0 0 34 43" xmlns="http://www.w3.org/2000/svg">
-  <path d="M17 42 L10.2 28 h13.6 Z" fill="${color}"/>
-  <circle cx="17" cy="17" r="14.5" fill="${color}" stroke="${ring}" stroke-width="${selected ? 2.8 : 2.2}"/>
-  <g transform="translate(9.5,9.5) scale(0.625)">
-    ${iconSvgMarkup(categoryKey, { size: 24, color: '#ffffff', width: 2.2 })}
-  </g>
-</svg>`
-}
-
-// Leaflet mutates icon instances, so cache one per (category, selected) pair.
-const iconCache = new Map()
-
-function pinIcon(categoryKey, selected) {
-  const key = `${categoryKey}:${selected}`
-  if (!iconCache.has(key)) {
-    iconCache.set(
-      key,
-      L.divIcon({
-        html: pinMarkup(categoryKey, selected),
-        className: `pin${selected ? ' pin-selected' : ''}`,
-        iconSize: [34, 43],
-        iconAnchor: [17, 42],
-      }),
-    )
-  }
-  return iconCache.get(key)
-}
+const CORE_RADIUS_KM = 6 // day trips beyond this don't drive the opening view
 
 function MapController({ active, focus, nudge, sheetOffset, initialBounds }) {
   const map = useMap()
@@ -128,39 +90,22 @@ export default function MapView({
     return L.latLngBounds((core.length ? core : MAPPABLE).map((p) => [p.lat, p.lng]))
   }, [])
 
-  const markers = useMemo(
-    () =>
-      places.map((place) => (
-        <Marker
-          key={place.id}
-          position={[place.lat, place.lng]}
-          icon={pinIcon(place.category, place.id === selectedId)}
-          zIndexOffset={place.id === selectedId ? 1000 : 0}
-          eventHandlers={{ click: () => onSelect(place.id) }}
-          alt={place.name}
-        />
-      )),
-    [places, selectedId, onSelect],
-  )
-
   return (
     <div className="relative h-full w-full">
       <MapContainer
         center={[CITY_CENTER.lat, CITY_CENTER.lng]}
         zoom={13}
         zoomControl={false}
+        maxZoom={18}
+        // Leaflet's tile fade-in gets stuck at opacity 0 when invalidateSize
+        // fires mid-fade (which it does when this tab becomes visible).
+        // Nothing here needs the fade, so skip it entirely.
+        fadeAnimation={false}
         attributionControl
         className="h-full w-full"
       >
-        {/* Keyless OSM tiles, desaturated in CSS (see .leaflet-tile-pane in
-            index.css) so the basemap recedes and pins are the only colour. */}
-        <TileLayer
-          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          maxZoom={19}
-          crossOrigin="anonymous"
-        />
-        {markers}
+        <BaseLayer />
+        <ClusterLayer places={places} selectedId={selectedId} onSelect={onSelect} />
         {position && (
           <>
             <Circle

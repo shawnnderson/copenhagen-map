@@ -55,11 +55,10 @@ body {
   font-weight: 700;
 }
 
-/* Positron-style basemap without a tile provider API key: desaturate the
-   standard OSM raster. Applied to the tile pane only, so pins, the accuracy
-   circle and all overlays keep their colour. */
+/* Esri's Light Gray Canvas is very low-contrast by design; a small nudge
+   separates land from water without reintroducing clutter. */
 .leaflet-tile-pane {
-  filter: grayscale(1) brightness(1.17) contrast(0.76);
+  filter: contrast(1.12) brightness(0.985);
 }
 
 .leaflet-container {
@@ -83,6 +82,13 @@ body {
 .pin {
   background: none;
   border: none;
+}
+
+/* markercluster's default chrome — we draw our own badges instead. */
+.marker-cluster,
+.marker-cluster div {
+  background: none !important;
+  border: none !important;
 }
 
 .pin svg {
