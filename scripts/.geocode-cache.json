@@ -1,0 +1,258 @@
+{
+  "Barr, Copenhagen, Denmark": {
+    "lat": 55.677903,
+    "lng": 12.596267,
+    "neighborhood": "Christianshavn",
+    "displayName": "Restaurant Barr, Strandgade, Gammelholm, Christianshavn, København, Københavns Kommune, Region Hovedstaden, 1428, Danmark",
+    "osmId": "node/5017218129",
+    "fetchedAt": "2026-09-07T19:14:45.469Z"
+  },
+  "Mad & Kaffe, Copenhagen, Denmark": {
+    "lat": 55.66592,
+    "lng": 12.550383,
+    "neighborhood": "Vesterbro",
+    "displayName": "Mad & Kaffe, Sønder Boulevard, Den Gule By, Vesterbro, København, Københavns Kommune, Region Hovedstaden, 1721, Danmark",
+    "osmId": "node/746302708",
+    "fetchedAt": "2026-09-07T19:14:46.742Z"
+  },
+  "Goods, Copenhagen, Denmark": {
+    "lat": 55.696593,
+    "lng": 12.579999,
+    "neighborhood": "Østerbro",
+    "displayName": "Goods, Østerbrogade, Østervold, Østerbro, København, Københavns Kommune, Region Hovedstaden, 1350, Danmark",
+    "osmId": "node/4883939652",
+    "fetchedAt": "2026-09-07T19:14:48.071Z"
+  },
+  "Next Door Cafe, Copenhagen, Denmark": {
+    "lat": 55.678866,
+    "lng": 12.568814,
+    "neighborhood": "Pisserenden",
+    "displayName": "Next Door Cafe, Larsbjørnsstræde, Pisserenden, Nørrevold, Indre By, København, Københavns Kommune, Region Hovedstaden, 1455, Danmark",
+    "osmId": "node/4018484841",
+    "fetchedAt": "2026-09-07T19:14:49.543Z"
+  },
+  "La Banchina, Copenhagen, Denmark": {
+    "lat": 55.689293,
+    "lng": 12.610906,
+    "neighborhood": "Christianshavn",
+    "displayName": "La Banchina, Refshalevej, Refshaleøen, Christianshavn, København, Københavns Kommune, Region Hovedstaden, 1432, Danmark",
+    "osmId": "node/4430760869",
+    "fetchedAt": "2026-09-07T19:14:50.866Z"
+  },
+  "Bæst, Copenhagen, Denmark": {
+    "lat": 55.692219,
+    "lng": 12.555909,
+    "neighborhood": "Nørrebro",
+    "displayName": "Bæst, Guldbergsgade, De Gamles By, Nørrebro, København, Københavns Kommune, Region Hovedstaden, 2200, Danmark",
+    "osmId": "node/3659148934",
+    "fetchedAt": "2026-09-07T19:14:52.191Z"
+  },
+  "Fabro, Copenhagen, Denmark": {
+    "lat": 55.68661,
+    "lng": 12.587837,
+    "neighborhood": "Indre By",
+    "displayName": "Fabro, Fredericiagade, Nyboder, Indre By, København, Københavns Kommune, Region Hovedstaden, 1310, Danmark",
+    "osmId": "node/5268759952",
+    "fetchedAt": "2026-09-07T19:14:53.706Z"
+  },
+  "Poulette, Copenhagen, Denmark": {
+    "lat": 55.690457,
+    "lng": 12.555242,
+    "neighborhood": "Nørrebro",
+    "displayName": "Poulette, Møllegade, De Gamles By, Nørrebro, København, Københavns Kommune, Region Hovedstaden, 2200, Danmark",
+    "osmId": "node/8197943615",
+    "fetchedAt": "2026-09-07T19:14:55.005Z"
+  },
+  "Graziano, Copenhagen, Denmark": {
+    "lat": 55.69108,
+    "lng": 12.556136,
+    "neighborhood": "Nørrebro",
+    "displayName": "Graziano, Møllegade, De Gamles By, Nørrebro, København, Københavns Kommune, Region Hovedstaden, 2200, Danmark",
+    "osmId": "node/12798373368",
+    "fetchedAt": "2026-09-07T19:14:59.542Z"
+  },
+  "Juno the Bakery, Copenhagen, Denmark": {
+    "lat": 55.706159,
+    "lng": 12.581796,
+    "neighborhood": "Indre Østerbro",
+    "displayName": "Juno the Bakery, Århusgade, Indre Østerbro, Østerbro, København, Københavns Kommune, Region Hovedstaden, 2100, Danmark",
+    "osmId": "node/5251686148",
+    "fetchedAt": "2026-09-07T19:15:02.531Z"
+  },
+  "Pompette, Copenhagen, Denmark": {
+    "lat": 55.69056,
+    "lng": 12.555409,
+    "neighborhood": "Nørrebro",
+    "displayName": "Pompette, Møllegade, De Gamles By, Nørrebro, København, Københavns Kommune, Region Hovedstaden, 2200, Danmark",
+    "osmId": "node/5741803461",
+    "fetchedAt": "2026-09-07T19:15:03.988Z"
+  },
+  "Villa Copenhagen, Copenhagen, Denmark": {
+    "lat": 55.671403,
+    "lng": 12.567736,
+    "neighborhood": "Postbyen",
+    "displayName": "Villa Copenhagen, Tietgensgade, Postbyen, Vestervold, Kødbyen, København, Københavns Kommune, Region Hovedstaden, 1704, Danmark",
+    "osmId": "node/7179104554",
+    "fetchedAt": "2026-09-07T19:15:05.540Z"
+  },
+  "Louisiana Museum of Modern Art, Humlebæk, Humlebæk, Denmark": {
+    "lat": 55.969352,
+    "lng": 12.543157,
+    "neighborhood": "Gammel Humlebæk",
+    "displayName": "Louisiana Museum of Modern Art, Gammel Strandvej, Gammel Humlebæk, Krogerup, Humlebæk, Fredensborg Kommune, Region Hovedstaden, 3050, Danmark",
+    "osmId": "way/436227052",
+    "fetchedAt": "2026-09-07T19:15:06.855Z"
+  },
+  "Mikkeller, Copenhagen, Denmark": {
+    "lat": 55.67432,
+    "lng": 12.565283,
+    "neighborhood": "Kødbyen",
+    "displayName": "Færgekroen Mikkeller, Bernstorffsgade, Vestervold, Kødbyen, København, Københavns Kommune, Region Hovedstaden, 1570, Danmark",
+    "osmId": "node/12833708899",
+    "fetchedAt": "2026-09-07T19:15:12.957Z"
+  },
+  "Jazzhus Montmartre, Copenhagen, Denmark": {
+    "lat": 55.682002,
+    "lng": 12.58246,
+    "neighborhood": "Indre By",
+    "displayName": "Jazzhus Montmartre, Store Regnegade, Gammelholm, Indre By, København, Københavns Kommune, Region Hovedstaden, 1110, Danmark",
+    "osmId": "node/4617344415",
+    "fetchedAt": "2026-09-07T19:15:14.530Z"
+  },
+  "Hotel Sanders, Copenhagen, Denmark": {
+    "lat": 55.67843,
+    "lng": 12.587561,
+    "neighborhood": "Christianshavn",
+    "displayName": "Hotel Sanders, Tordenskjoldsgade, Gammelholm, Christianshavn, København, Københavns Kommune, Region Hovedstaden, 1055, Danmark",
+    "osmId": "node/5304900474",
+    "fetchedAt": "2026-09-07T19:15:16.959Z"
+  },
+  "Les Trois Cochons, Copenhagen, Denmark": {
+    "lat": 55.673703,
+    "lng": 12.550029,
+    "neighborhood": "Vesterbro",
+    "displayName": "Les trois cochons, Værnedamsvej, Vestervold, Vesterbro, København, Københavns Kommune, Region Hovedstaden, 1619, Danmark",
+    "osmId": "node/733791085",
+    "fetchedAt": "2026-09-07T19:15:18.483Z"
+  },
+  "Granola, Copenhagen, Denmark": {
+    "lat": 55.673402,
+    "lng": 12.549813,
+    "neighborhood": "Vesterbro",
+    "displayName": "Granola, Værnedamsvej, Vestervold, Vesterbro, København, Frederiksberg Kommune, Region Hovedstaden, 1619, Danmark",
+    "osmId": "node/4011872491",
+    "fetchedAt": "2026-09-07T19:15:19.965Z"
+  },
+  "Atelier September, Copenhagen, Denmark": {
+    "lat": 55.687412,
+    "lng": 12.584984,
+    "neighborhood": "Indre By",
+    "displayName": "Atelier September, Fredericiagade, Nyboder, Indre By, København, Københavns Kommune, Region Hovedstaden, 1312, Danmark",
+    "osmId": "node/10841574556",
+    "fetchedAt": "2026-09-07T19:15:21.456Z"
+  },
+  "Møntergade, Copenhagen, Denmark": {
+    "lat": 55.68166,
+    "lng": 12.579281,
+    "neighborhood": "Indre By",
+    "displayName": "Møntergade, Nyboder, Indre By, København, Københavns Kommune, Region Hovedstaden, 1116, Danmark",
+    "osmId": "way/158013577",
+    "fetchedAt": "2026-09-07T19:15:22.741Z"
+  },
+  "Esmée, Copenhagen, Denmark": {
+    "lat": 55.681293,
+    "lng": 12.586258,
+    "neighborhood": "Indre By",
+    "displayName": "Esmée, Kongens Nytorv, Gammelholm, Indre By, København, Københavns Kommune, Region Hovedstaden, 1050, Danmark",
+    "osmId": "node/9591044690",
+    "fetchedAt": "2026-09-07T19:15:32.333Z"
+  },
+  "Toldboden, Copenhagen, Denmark": {
+    "lat": 55.690119,
+    "lng": 12.599739,
+    "neighborhood": "Indre By",
+    "displayName": "Prepkøkken Toldboden, Nordre Toldbod, Frederiksstaden, Indre By, København, Københavns Kommune, Region Hovedstaden, 1259, Danmark",
+    "osmId": "node/9091794510",
+    "fetchedAt": "2026-09-07T19:15:33.819Z"
+  },
+  "Torvehallerne, Copenhagen, Denmark": {
+    "lat": 55.683867,
+    "lng": 12.569551,
+    "neighborhood": "Indre By",
+    "displayName": "Torvehallerne, Frederiksborggade, Nørrevold, Indre By, København, Københavns Kommune, Region Hovedstaden, 1361, Danmark",
+    "osmId": "way/77037963",
+    "fetchedAt": "2026-09-07T19:15:35.120Z"
+  },
+  "Ripotot, Copenhagen, Denmark": {
+    "lat": 55.683482,
+    "lng": 12.587209,
+    "neighborhood": "Indre By",
+    "displayName": "Ripotot, Dronningens Tværgade, Frederiksstaden, Indre By, København, Københavns Kommune, Region Hovedstaden, 1264, Danmark",
+    "osmId": "node/10810876386",
+    "fetchedAt": "2026-09-07T19:15:36.611Z"
+  },
+  "Restaurant Frank, Copenhagen, Denmark": {
+    "lat": 55.681103,
+    "lng": 12.584218,
+    "neighborhood": "Indre By",
+    "displayName": "Frank, Ny Adelgade, Gammelholm, Indre By, København, Københavns Kommune, Region Hovedstaden, 1104, Danmark",
+    "osmId": "node/5276233168",
+    "fetchedAt": "2026-09-07T19:15:38.473Z"
+  },
+  "Jordnær, Gentofte, Denmark": {
+    "lat": 55.748106,
+    "lng": 12.541217,
+    "neighborhood": "Gentofte",
+    "displayName": "Restaurant Jordnær, Gentoftegade, Gentofte, Jægersborg, Gentofte Kommune, Region Hovedstaden, 2820, Danmark",
+    "osmId": "node/4868621088",
+    "fetchedAt": "2026-09-07T19:15:41.528Z"
+  },
+  "Levi, Copenhagen, Denmark": {
+    "lat": 55.681815,
+    "lng": 12.582273,
+    "neighborhood": "Indre By",
+    "displayName": "Levi, Store Regnegade, Gammelholm, Indre By, København, Københavns Kommune, Region Hovedstaden, 1110, Danmark",
+    "osmId": "node/9662350847",
+    "fetchedAt": "2026-09-07T19:15:43.058Z"
+  },
+  "Kadeau, Copenhagen, Denmark": {
+    "lat": 55.672255,
+    "lng": 12.588855,
+    "neighborhood": "Christianshavn",
+    "displayName": "Kadeau København, Wildersgade, Gammelholm, Christianshavn, København, Københavns Kommune, Region Hovedstaden, 1408, Danmark",
+    "osmId": "node/2713759585",
+    "fetchedAt": "2026-09-07T19:15:44.482Z"
+  },
+  "Noma, Copenhagen, Denmark": {
+    "lat": 55.68251,
+    "lng": 12.610789,
+    "neighborhood": "Christiania",
+    "displayName": "Noma, Bjørnekloen, Christiania, Holmen, Amagerbro, København, Københavns Kommune, Region Hovedstaden, 1441, Danmark",
+    "osmId": "node/5416925514",
+    "fetchedAt": "2026-09-07T19:15:45.786Z"
+  },
+  "Finn Juhls Hus, Charlottenlund, Denmark": {
+    "lat": 55.767805,
+    "lng": 12.563714,
+    "neighborhood": "Charlottenlund",
+    "displayName": "Finn Juhls hus, Kratvænget, Charlottenlund, Klampenborg, Gentofte Kommune, Region Hovedstaden, 2920, Danmark",
+    "osmId": "way/982285341",
+    "fetchedAt": "2026-09-07T19:17:25.950Z"
+  },
+  "Tata bar, Tordenskjoldsgade, København, Denmark": {
+    "lat": 55.678374,
+    "lng": 12.587563,
+    "neighborhood": "Christianshavn",
+    "displayName": "Tata bar, Tordenskjoldsgade, Gammelholm, Christianshavn, København, Københavns Kommune, Region Hovedstaden, 1055, Danmark",
+    "osmId": "node/8124949021",
+    "fetchedAt": "2026-09-07T19:17:29.665Z"
+  },
+  "Camino, Kødbyen, København, Denmark": {
+    "lat": 55.668217,
+    "lng": 12.557568,
+    "neighborhood": "Kødbyen",
+    "displayName": "Camino, Høkerboderne, Vestervold, Kødbyen, København, Københavns Kommune, Region Hovedstaden, 1712, Danmark",
+    "osmId": "node/9091138282",
+    "fetchedAt": "2026-09-07T19:17:32.431Z"
+  }
+}

@@ -3,8 +3,8 @@
     "name": "Kødbyens Fiskebar",
     "category": "restaurant",
     "neighborhood": "Vesterbro",
-    "note": "Old meatpacking district. Oysters and natural wine at the bar, no reservation needed if you go early.",
-    "recommendedBy": "Maya",
+    "note": "Such great seafood and vibes, and in a lively area for drinks after.",
+    "recommendedBy": "",
     "lat": 55.6684,
     "lng": 12.5614
   },
@@ -12,8 +12,8 @@
     "name": "Hart Bageri",
     "category": "coffee",
     "neighborhood": "Frederiksberg",
-    "note": "Best cardamom bun in the city. Sells out by noon on weekends.",
-    "recommendedBy": "Jonas",
+    "note": "",
+    "recommendedBy": "",
     "lat": 55.6786,
     "lng": 12.529
   },
@@ -21,9 +21,330 @@
     "name": "Havnebadet Islands Brygge",
     "category": "activity",
     "neighborhood": "Islands Brygge",
-    "note": "Harbour bath, free, clean water. Bring a towel and go before 11am to beat the crowd.",
-    "recommendedBy": "Sofie",
+    "note": "",
+    "recommendedBy": "",
     "lat": 55.669,
     "lng": 12.579
+  },
+  {
+    "name": "Barr",
+    "category": "restaurant",
+    "neighborhood": "Christianshavn",
+    "note": "",
+    "recommendedBy": "",
+    "lat": 55.677903,
+    "lng": 12.596267
+  },
+  {
+    "name": "Mad & Kaffe",
+    "category": "coffee",
+    "neighborhood": "Vesterbro",
+    "note": "",
+    "recommendedBy": "",
+    "lat": 55.66592,
+    "lng": 12.550383
+  },
+  {
+    "name": "Goods",
+    "category": "shop",
+    "neighborhood": "Østerbro",
+    "note": "Clothing store.",
+    "recommendedBy": "",
+    "lat": 55.696593,
+    "lng": 12.579999
+  },
+  {
+    "name": "Next Door Cafe",
+    "category": "coffee",
+    "neighborhood": "Pisserenden",
+    "note": "",
+    "recommendedBy": "",
+    "lat": 55.678866,
+    "lng": 12.568814
+  },
+  {
+    "name": "La Banchina",
+    "category": "restaurant",
+    "neighborhood": "Christianshavn",
+    "note": "Seafood restaurant on the water.",
+    "recommendedBy": "",
+    "lat": 55.689293,
+    "lng": 12.610906
+  },
+  {
+    "name": "Bæst",
+    "category": "restaurant",
+    "neighborhood": "Nørrebro",
+    "note": "Yummy pizza.",
+    "recommendedBy": "",
+    "lat": 55.692219,
+    "lng": 12.555909
+  },
+  {
+    "name": "Fabro",
+    "category": "restaurant",
+    "neighborhood": "Indre By",
+    "note": "Italian restaurant.",
+    "recommendedBy": "",
+    "lat": 55.68661,
+    "lng": 12.587837
+  },
+  {
+    "name": "Poulette",
+    "category": "restaurant",
+    "neighborhood": "Nørrebro",
+    "note": "Fried chicken takeaway.",
+    "recommendedBy": "",
+    "lat": 55.690457,
+    "lng": 12.555242
+  },
+  {
+    "name": "Finn Juhl's House",
+    "category": "activity",
+    "neighborhood": "Charlottenlund",
+    "note": "Museum.",
+    "recommendedBy": "",
+    "geocodeQuery": "Finn Juhls Hus, Charlottenlund, Denmark",
+    "lat": 55.767805,
+    "lng": 12.563714
+  },
+  {
+    "name": "Beatriders",
+    "category": "activity",
+    "neighborhood": "",
+    "note": "Fitness studio — cycling and Lagree.",
+    "recommendedBy": ""
+  },
+  {
+    "name": "Graziano",
+    "category": "restaurant",
+    "neighborhood": "Nørrebro",
+    "note": "",
+    "recommendedBy": "",
+    "lat": 55.69108,
+    "lng": 12.556136
+  },
+  {
+    "name": "Bar Amore",
+    "category": "restaurant",
+    "neighborhood": "",
+    "note": "Italian.",
+    "recommendedBy": ""
+  },
+  {
+    "name": "Juno the Bakery",
+    "category": "coffee",
+    "neighborhood": "Indre Østerbro",
+    "note": "Bakery.",
+    "recommendedBy": "",
+    "lat": 55.706159,
+    "lng": 12.581796
+  },
+  {
+    "name": "Pompette",
+    "category": "bar",
+    "neighborhood": "Nørrebro",
+    "note": "Wine bar.",
+    "recommendedBy": "",
+    "lat": 55.69056,
+    "lng": 12.555409
+  },
+  {
+    "name": "Villa Copenhagen",
+    "category": "stay",
+    "neighborhood": "Postbyen",
+    "note": "Hotel.",
+    "recommendedBy": "",
+    "lat": 55.671403,
+    "lng": 12.567736
+  },
+  {
+    "name": "Louisiana Museum of Modern Art",
+    "category": "activity",
+    "neighborhood": "Humlebæk",
+    "note": "International art from 1945 to today. Buy tickets online to skip the queue.",
+    "recommendedBy": "",
+    "city": "Humlebæk, Denmark",
+    "lat": 55.969352,
+    "lng": 12.543157
+  },
+  {
+    "name": "TATA Cocktail Bar",
+    "category": "bar",
+    "neighborhood": "Christianshavn",
+    "note": "Drinks out front of the hotel, or the roof at Hotel Sanders.",
+    "recommendedBy": "",
+    "geocodeQuery": "Tata bar, Tordenskjoldsgade, København, Denmark",
+    "lat": 55.678374,
+    "lng": 12.587563
+  },
+  {
+    "name": "Lidkoeb",
+    "category": "bar",
+    "neighborhood": "",
+    "note": "Top pick. Multiple floors and always lively — normal bar downstairs, whiskey speakeasy upstairs.",
+    "recommendedBy": ""
+  },
+  {
+    "name": "Camino",
+    "category": "bar",
+    "neighborhood": "Vesterbro",
+    "note": "Top pick. Easy to reach walking around the Meatpacking District. Very young, bumping area.",
+    "recommendedBy": "",
+    "geocodeQuery": "Camino, Kødbyen, København, Denmark",
+    "lat": 55.668217,
+    "lng": 12.557568
+  },
+  {
+    "name": "Mikkeller",
+    "category": "bar",
+    "neighborhood": "Kødbyen",
+    "note": "Chill vibes.",
+    "recommendedBy": "",
+    "lat": 55.67432,
+    "lng": 12.565283
+  },
+  {
+    "name": "Jazzhus Montmartre",
+    "category": "bar",
+    "neighborhood": "Indre By",
+    "note": "Jazz club.",
+    "recommendedBy": "",
+    "lat": 55.682002,
+    "lng": 12.58246
+  },
+  {
+    "name": "Hotel Sanders",
+    "category": "stay",
+    "neighborhood": "Christianshavn",
+    "note": "TATA Cocktail Bar is out front and on the roof.",
+    "recommendedBy": "",
+    "lat": 55.67843,
+    "lng": 12.587561
+  },
+  {
+    "name": "Les Trois Cochons",
+    "category": "restaurant",
+    "neighborhood": "Vesterbro",
+    "note": "Breakfast. Great omelette — sit at the bar.",
+    "recommendedBy": "",
+    "lat": 55.673703,
+    "lng": 12.550029
+  },
+  {
+    "name": "Granola",
+    "category": "coffee",
+    "neighborhood": "Vesterbro",
+    "note": "Cosy cafe. Good for breakfast.",
+    "recommendedBy": "",
+    "lat": 55.673402,
+    "lng": 12.549813
+  },
+  {
+    "name": "Atelier September",
+    "category": "coffee",
+    "neighborhood": "Indre By",
+    "note": "Breakfast.",
+    "recommendedBy": "",
+    "lat": 55.687412,
+    "lng": 12.584984
+  },
+  {
+    "name": "Møntergade",
+    "category": "restaurant",
+    "neighborhood": "Indre By",
+    "note": "Classic Danish lunch.",
+    "recommendedBy": "",
+    "lat": 55.68166,
+    "lng": 12.579281
+  },
+  {
+    "name": "Esmée",
+    "category": "restaurant",
+    "neighborhood": "Indre By",
+    "note": "Nice central spot. A little much, but perfect for a light bite, a glass of rosé and a seat in the sun.",
+    "recommendedBy": "",
+    "lat": 55.681293,
+    "lng": 12.586258
+  },
+  {
+    "name": "Toldboden",
+    "category": "restaurant",
+    "neighborhood": "Indre By",
+    "note": "Array of bites, and nice to sit out and walk around after.",
+    "recommendedBy": "",
+    "lat": 55.690119,
+    "lng": 12.599739
+  },
+  {
+    "name": "Torvehallerne",
+    "category": "shop",
+    "neighborhood": "Indre By",
+    "note": "Top pick. Covered food market.",
+    "recommendedBy": "",
+    "lat": 55.683867,
+    "lng": 12.569551
+  },
+  {
+    "name": "Ripotot",
+    "category": "restaurant",
+    "neighborhood": "Indre By",
+    "note": "Top pick.",
+    "recommendedBy": "",
+    "lat": 55.683482,
+    "lng": 12.587209
+  },
+  {
+    "name": "Restaurant Frank",
+    "category": "restaurant",
+    "neighborhood": "Indre By",
+    "note": "",
+    "recommendedBy": "",
+    "lat": 55.681103,
+    "lng": 12.584218
+  },
+  {
+    "name": "Mason",
+    "category": "restaurant",
+    "neighborhood": "",
+    "note": "",
+    "recommendedBy": ""
+  },
+  {
+    "name": "Jordnær",
+    "category": "restaurant",
+    "neighborhood": "Gentofte",
+    "note": "Three Michelin stars.",
+    "recommendedBy": "",
+    "city": "Gentofte, Denmark",
+    "lat": 55.748106,
+    "lng": 12.541217
+  },
+  {
+    "name": "Levi",
+    "category": "restaurant",
+    "neighborhood": "Indre By",
+    "note": "",
+    "recommendedBy": "",
+    "lat": 55.681815,
+    "lng": 12.582273
+  },
+  {
+    "name": "Kadeau",
+    "category": "restaurant",
+    "neighborhood": "Christianshavn",
+    "note": "Two Michelin stars. A really special meal.",
+    "recommendedBy": "",
+    "lat": 55.672255,
+    "lng": 12.588855
+  },
+  {
+    "name": "Noma",
+    "category": "restaurant",
+    "neighborhood": "Christiania",
+    "note": "Expensive, but the best restaurant in the world. Sometimes you can email for a solo seat at a shared table.",
+    "recommendedBy": "",
+    "lat": 55.68251,
+    "lng": 12.610789
   }
 ]

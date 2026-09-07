@@ -3,6 +3,9 @@ import { MapContainer, TileLayer, Marker, Circle, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import { categoryOf, iconSvgMarkup } from '../lib/categories.js'
 import { CITY_CENTER, MAPPABLE } from '../lib/places.js'
+import { distanceKm } from '../lib/geo.js'
+
+const CORE_RADIUS_KM = 15 // pins beyond this don't drive the opening view
 
 const RING_DEFAULT = '#ffffff'
 const RING_SELECTED = '#c9a227' // warm gold, as on the reference's active pins
@@ -111,10 +114,19 @@ export default function MapView({
   onToggleLegend,
   legend,
 }) {
-  const initialBounds = useMemo(
-    () => (MAPPABLE.length ? L.latLngBounds(MAPPABLE.map((p) => [p.lat, p.lng])) : null),
-    [],
-  )
+  // Frame the city cluster, not every pin: a day trip 30km up the coast would
+  // otherwise zoom the opening view out over empty water. Outliers are still
+  // on the map — just a pinch away.
+  const initialBounds = useMemo(() => {
+    if (!MAPPABLE.length) return null
+    const median = (xs) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)]
+    const centre = {
+      lat: median(MAPPABLE.map((p) => p.lat)),
+      lng: median(MAPPABLE.map((p) => p.lng)),
+    }
+    const core = MAPPABLE.filter((p) => distanceKm(centre, p) <= CORE_RADIUS_KM)
+    return L.latLngBounds((core.length ? core : MAPPABLE).map((p) => [p.lat, p.lng]))
+  }, [])
 
   const markers = useMemo(
     () =>

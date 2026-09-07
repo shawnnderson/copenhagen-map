@@ -50,8 +50,12 @@ function needsCoords(place) {
 }
 
 function queryFor(place) {
+  // `geocodeQuery` is an escape hatch for places OSM files under a different
+  // name than you want displayed ("Finn Juhls Hus" vs "Finn Juhl's House").
+  if (place.geocodeQuery) return place.geocodeQuery
   // Neighborhood meaningfully disambiguates common names ("Ruby", "Hart").
-  return [place.name, place.neighborhood, CITY].filter(Boolean).join(', ')
+  // An optional per-place `city` covers day trips outside the default city.
+  return [place.name, place.neighborhood, place.city || CITY].filter(Boolean).join(', ')
 }
 
 async function loadJson(path, fallback) {
@@ -69,7 +73,7 @@ async function geocode(query) {
     q: query,
     format: 'jsonv2',
     limit: '1',
-    addressdetails: '0',
+    addressdetails: '1',
   })}`
 
   const res = await fetch(url, {
@@ -84,9 +88,16 @@ async function geocode(query) {
   const [hit] = await res.json()
   if (!hit) return null
 
+  const a = hit.address ?? {}
+  // Nominatim's district fields, most specific first. Used only to fill a
+  // neighborhood that was left blank — never to overwrite one you wrote.
+  const neighborhood =
+    a.neighbourhood || a.suburb || a.quarter || a.city_district || a.borough || a.town || null
+
   return {
     lat: Number(Number(hit.lat).toFixed(6)),
     lng: Number(Number(hit.lon).toFixed(6)),
+    neighborhood,
     displayName: hit.display_name,
     osmId: `${hit.osm_type ?? '?'}/${hit.osm_id ?? '?'}`,
     fetchedAt: new Date().toISOString(),
@@ -144,6 +155,7 @@ async function main() {
 
     place.lat = hit.lat
     place.lng = hit.lng
+    if (!place.neighborhood && hit.neighborhood) place.neighborhood = hit.neighborhood
     resolved++
   }
 

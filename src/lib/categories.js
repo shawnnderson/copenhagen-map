@@ -31,6 +31,12 @@ export const CATEGORIES = {
     color: '#14539e',
     paths: ['M3.5 8.5h17v2.6a2.4 2.4 0 0 0 0 4.8v2.6h-17v-2.6a2.4 2.4 0 0 0 0-4.8V8.5Z', 'M13.5 9v1.8M13.5 13.2V15M13.5 17.2V19'],
   },
+  stay: {
+    label: 'Stays',
+    short: 'Stay',
+    color: '#8a5a1e',
+    paths: ['M3 19V7', 'M3 13h13a5 5 0 0 1 5 5v1', 'M3 17h18', 'M7 10.5h3.5'],
+  },
   shop: {
     label: 'Shops',
     short: 'Shop',
